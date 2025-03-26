@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
