@@ -3,6 +3,7 @@ package joaopaulofelipe.api.services.impl;
 import joaopaulofelipe.api.domain.User;
 import joaopaulofelipe.api.domain.dto.UserDTO;
 import joaopaulofelipe.api.repositories.UserRepository;
+import joaopaulofelipe.api.services.exceptions.DataIntegratyViolationException;
 import joaopaulofelipe.api.services.exceptions.ObjctNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -108,6 +109,19 @@ class UserServiceImplTest {
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
         assertEquals(PASSWORD, response.getPassword());
+
+    }
+    @Test
+    void whenCreateThenReturnAnDataIntegratyViolationException() {
+        when(repository.findByEmail(any())).thenReturn(optionalUser);
+
+        try {
+            optionalUser.get().setId(2);
+            service.create(userDTO);
+        }catch (Exception ex){
+            assertEquals(DataIntegratyViolationException.class, ex.getClass());
+            assertEquals("E-mail já cadastrado no sistema", ex.getMessage());
+        }
 
     }
 
