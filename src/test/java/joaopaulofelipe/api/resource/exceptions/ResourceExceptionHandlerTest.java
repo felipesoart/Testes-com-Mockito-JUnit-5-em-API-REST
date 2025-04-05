@@ -1,20 +1,25 @@
 package joaopaulofelipe.api.resource.exceptions;
 
+
 import joaopaulofelipe.api.services.exceptions.ObjctNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class ResourceExceptionHandlerTest {
 
     public static final String OBJETO_NAO_ENCONTRADO = "Objeto não encontrado";
+
+    @InjectMocks
     private ResourceExceptionHandler exceptionHandler;
 
     @BeforeEach
